@@ -1,0 +1,7 @@
+<section class="row">
+  <%= for node <- @nodes do %>
+    <article class="column">
+      <h1>Hello <%=  node %></h1>
+    </article>
+<% end %>
+</section>
