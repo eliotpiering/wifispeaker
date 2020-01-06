@@ -44,7 +44,11 @@ config :ui, UiWeb.Endpoint,
   server: true,
   render_errors: [view: UiWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: UiWeb.PubSub, adapter: Phoenix.PubSub.PG2],
-  code_reloader: false
+  code_reloader: false,
+  live_view: [
+    signing_salt: "o6nInNgGw/HJW6vmDYck0alRdBsiqJqR"
+  ]
+
 
 config :phoenix, :json_library, Jason
 

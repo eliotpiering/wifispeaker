@@ -22,8 +22,16 @@ defmodule Firmware.ParsePcm do
   @chunk_size_in_bytes 400
 
   # TODO use monotonic_time
-  def parse(start_time) do
+  def parse_file(start_time) do
     File.read!("../ui/xab") |> parse(start_time, [])
+  end
+
+  def parse_chunks(binary, start_time) when bit_size(binary) > @chunk_size do
+    parse(binary, start_time, [])
+  end
+
+  def parse_chunks(binary, start_time) do
+    {:error, :not_enough}
   end
 
   def parse(binary, start_time, data) when bit_size(binary) > @chunk_size do
@@ -32,6 +40,6 @@ defmodule Firmware.ParsePcm do
   end
 
   def parse(binary, start_time, data) do
-    data ++ [{start_time, binary}]
+    {:ok, (data ++ [{start_time, binary}]), start_time}
   end
 end

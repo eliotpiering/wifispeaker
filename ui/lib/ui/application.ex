@@ -15,10 +15,10 @@ defmodule Ui.Application do
 
       #TODO learn about suprevisors and the correct way to structure this..
       # this PlaySong includes starting the buffer
-      %{
-        id: Firmware.PlaySong,
-        start: {Firmware.PlaySong, :play, []}
-      }
+      # %{
+      #   id: Firmware.PlaySong,
+      #   start: {Firmware.PlaySong, :play, []}
+      # }
       # Starts a worker by calling: Ui.Worker.start_link(arg)
       # {Ui.Worker, arg},
     ]

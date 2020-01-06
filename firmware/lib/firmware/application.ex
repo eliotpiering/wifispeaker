@@ -14,31 +14,19 @@ defmodule Firmware.Application do
     # for other strategies and supported options
 
     opts = [strategy: :one_for_one, name: Firmware.Supervisor]
-    Supervisor.start_link(children(@target), opts)
+    # Supervisor.start_link(children(@target), opts)
+    Supervisor.start_link(children("host"), opts)
   end
 
   # List all child processes to be supervised
   def children("host") do
     [
-      # Starts a worker by calling: Firmware.Worker.start_link(arg)
-      # {Firmware.Worker, arg},
-
-      # {Phoenix.PubSub.PG2, name: MyApp.PubSub},
-      # supervisor(Pheonix.PubSub.PG2, [:my_pubsub])
-    ]
-  end
-
-  def children(_target) do
-    [
-      # %{
-      #   id: Phoenix.PubSub.PG2,
-      #   start: {Phoenix.PubSub.PG2, :start_link, [:my_pubsub, []]}
-      #   }
-
-      # {Phoenix.PubSub.PG2, name: Firmware.PubSub},
-      # supervisor(MyApp.PubSub, [:my_pubsub])
-      # Starts a worker by calling: Firmware.Worker.start_link(arg)
-      # {Firmware.Worker, arg},
+      {Firmware.Buffer, Firmware.Buffer},
+      Firmware.BufferIn,
+      Firmware.AlsaPlayer,
+      Firmware.Receiver,
+      Firmware.Parser,
+      Firmware.Server
     ]
   end
 end

@@ -40,7 +40,7 @@ defmodule Firmware.PlaySong do
         play_chunk_at(time, chunk, port)
 
       # on time
-      diff < 500 ->
+      diff < 50 ->
         play_chunk(chunk, port)
 
       # late

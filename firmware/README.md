@@ -30,3 +30,12 @@ To start your Nerves app:
 * Official website: https://nerves-project.org/
 * Discussion Slack elixir-lang #nerves ([Invite](https://elixir-slackin.herokuapp.com/))
 * Source: https://github.com/nerves-project/nerves
+
+
+## Scripts
+Firmware.Receiver.subscribe(Node.self())
+:pg2.get_local_members(Node.self())
+data = Firmware.ParsePcm.parse(System.os_time(441000) + 10*441000)
+Enum.each(data, fn n -> Firmware.Server.broadcast(n) end)
+
+Firmware.Buffer.pull
