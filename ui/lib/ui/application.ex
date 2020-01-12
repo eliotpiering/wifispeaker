@@ -11,7 +11,7 @@ defmodule Ui.Application do
       # Start the endpoint when the application starts
       UiWeb.Endpoint,
       # Ui.State
-      Supervisor.Spec.worker(Ui.State, [[name: Ui.State, pubsub_server: UiWeb.PubSub]]),
+      Supervisor.Spec.worker(Ui.State, [[name: Ui.State, pubsub_server: UiWeb.PubSub, broadcast_period: 500]]),
 
       #TODO learn about suprevisors and the correct way to structure this..
       # this PlaySong includes starting the buffer

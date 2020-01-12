@@ -22,18 +22,15 @@ defmodule Ui.State do
   end
 
   def handle_diff(diff, state) do
-    for {topic, {joins, leaves}} <- diff do
-      for {key, meta} <- joins do
-        IO.puts "presence join: key \"#{key}\" with meta #{inspect meta}"
-        msg = {:join, key, meta}
-        Phoenix.PubSub.direct_broadcast!(state.node_name, state.pubsub_server, topic, msg)
-      end
-      for {key, meta} <- leaves do
-        IO.puts "presence leave: key \"#{key}\" with meta #{inspect meta}"
-        msg = {:leave, key, meta}
-        Phoenix.PubSub.direct_broadcast!(state.node_name, state.pubsub_server, topic, msg)
-      end
-    end
+    Firmware.StatePubSub.notify_update()
+    # for {topic, {joins, leaves}} <- diff do
+    #   for {key, meta} <- joins do
+    #     IO.puts "presence join: key \"#{key}\" with meta #{inspect meta}"
+    #   end
+    #   for {key, meta} <- leaves do
+    #     IO.puts "presence leave: key \"#{key}\" with meta #{inspect meta}"
+    #   end
+    # end
     {:ok, state}
   end
 
@@ -43,12 +40,17 @@ defmodule Ui.State do
     Tracker.list(__MODULE__, @topic)
   end
 
-  def track(initial_data) do
-    Phoenix.Tracker.track(__MODULE__, self(), @topic, node(), initial_data)
+  def track(key, initial_data) do
+    Phoenix.Tracker.track(__MODULE__, self(), @topic, key, initial_data)
   end
 
-  def update(data = %{}) do
-    Phoenix.Tracker.update(__MODULE__, self(), @topic, node(), data)
+  def update(key, data = %{}) do
+    update(key, self(), data)
   end
+
+  def update(key, pid, data = %{}) do
+    Phoenix.Tracker.update(__MODULE__, pid, @topic, key, data)
+  end
+
 
 end

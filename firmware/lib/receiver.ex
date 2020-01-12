@@ -9,7 +9,10 @@ defmodule Firmware.Receiver do
 
   @impl true
   def init([]) do
-    {:ok, []}
+    key = Node.self()
+    state = %{volume: 80, id: key, name: key, status: :starting, pid: self()}
+    Ui.State.track(key, state)
+    {:ok, state}
   end
 
   def subscribe(topic) do

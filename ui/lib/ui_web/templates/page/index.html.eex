@@ -1,4 +1,5 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: List.last(Node.list) %></h1>
-  <p>A productive web framework that<br/>does not compromise speed or maintainability.</p>
-</section>
+<div id="container">
+    <span id="node-name" data-node-name="<%= Node.self() %>"></span>
+    <div id="nodes"></div>
+    <div id="streams"></div>
+</div>
