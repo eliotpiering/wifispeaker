@@ -1,5 +1,3 @@
-<div id="container">
-    <span id="node-name" data-node-name="<%= Node.self() %>"></span>
-    <div id="nodes"></div>
-    <div id="streams"></div>
+<span id="node-name" data-node-name="<%= Node.self() %>"></span>
+<div id="app">
 </div>

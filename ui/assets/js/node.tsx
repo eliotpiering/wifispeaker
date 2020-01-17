@@ -21,7 +21,7 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 interface NodeProps {
     node: Node;
     key: string;
-    handler: (action: string, data: any) => void;
+    handler: any;
 }
 
 const NodeComponent: React.FC<NodeProps> = (props: NodeProps) => {
@@ -29,7 +29,7 @@ const NodeComponent: React.FC<NodeProps> = (props: NodeProps) => {
     const [fullDetails, setFullDetails] = useState(false)
     const node = props.node
 
-    const handleVolumeChange = (event, newValue) => {
+    const handleVolumeChange = (_event: any, newValue: number) => {
         props.handler(ADJUST_VOLUME_ACTION, { id: node.id, volume: newValue })
     }
 
@@ -41,7 +41,7 @@ const NodeComponent: React.FC<NodeProps> = (props: NodeProps) => {
                 </Typography>
                 <Typography id="volume-slider" gutterBottom>
                     Volume
-            </Typography>
+                </Typography>
                 <Grid container spacing={2}>
                     <Grid item>
                         <VolumeDown />
@@ -59,7 +59,7 @@ const NodeComponent: React.FC<NodeProps> = (props: NodeProps) => {
                         aria-expanded={fullDetails}
                         aria-label="show more"
                     >
-                        {fullDetails ? <ExpandLessIcon /> : <ExpandMoreIcon /> }
+                        {fullDetails ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                     </IconButton>
                 </CardActions>
                 <Collapse in={fullDetails} timeout="auto" unmountOnExit>

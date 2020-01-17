@@ -1,7 +1,17 @@
 defmodule Ui.Edux do
 
-  def get_nodes do
-    Ui.State.list() |> to_valid_frontend_state
+  def ui_state do
+    %{nodes: get_nodes(),
+      streams: get_streams()
+    }
+  end
+
+  defp get_streams do
+    []
+  end
+
+  defp get_nodes do
+    Ui.State.list() |> to_valid_frontend_state |> Map.values
   end
 
   def update({"adjust_volume", volume, id}) do

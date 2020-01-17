@@ -23,14 +23,6 @@ defmodule Ui.State do
 
   def handle_diff(diff, state) do
     Firmware.StatePubSub.notify_update()
-    # for {topic, {joins, leaves}} <- diff do
-    #   for {key, meta} <- joins do
-    #     IO.puts "presence join: key \"#{key}\" with meta #{inspect meta}"
-    #   end
-    #   for {key, meta} <- leaves do
-    #     IO.puts "presence leave: key \"#{key}\" with meta #{inspect meta}"
-    #   end
-    # end
     {:ok, state}
   end
 
